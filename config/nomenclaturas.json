@@ -1,0 +1,52 @@
+{
+    "produtos": {
+        "AR": {"nome": "armário", "tensao": "baixa"},
+        "NU": {"nome": "cabine de barramento", "tensao": "baixa"},
+        "QE": {"nome": "quadro de embutir", "tensao": "baixa"},
+        "QS": {"nome": "quadro de sobrepor", "tensao": "baixa"},
+        "CM": {"nome": "caixa de medição", "tensao": "média"},
+        "CT": {"nome": "cubículo de transformador", "tensao": "média"},
+        "IN": {"nome": "invólucro", "tensao": "média"},
+        "MG": {"nome": "maggiore", "tensao": "média"},
+        "MC": {"nome": "microcompact", "tensao": "média"},
+        "MC36": {"nome": "microcompact 36kv", "tensao": "média"},
+        "NP": {"nome": "new piccolo", "tensao": "média"},
+        "SI": {"nome": "simplificada", "tensao": "média"},
+        "SK": {"nome": "skid", "tensao": "média"}
+    },
+    "familias": {
+        "BA": "base",
+        "BT": "batente",
+        "CC": "caixa",
+        "CX": "caixa",
+        "CH": "chapéu",
+        "CL": "coluna",
+        "FE": "fechamento",
+        "FI": "fechamento",
+        "FL": "flange",
+        "PM": "placa de montagem",
+        "PE": "porta",
+        "RE": "reforço",
+        "SU": "suporte",
+        "TE": "tela",
+        "TL": "telhado",
+        "TI": "caixa",
+        "TS": "caixa"
+    },
+    "materiais": {
+        "A": "SAE 1008",
+        "B": "NBR 7008 ZC",
+        "C": "NBR 7008 ZC PRÉ PINRTADO"
+    },
+    "bitolas": {
+        "A": "12",
+        "B": "14",
+        "C": "16",
+        "D": "20"
+    },
+    "tipos": {
+        "P": "peça",
+        "S": "submontagem",
+        "M": "montagem"
+    }
+}

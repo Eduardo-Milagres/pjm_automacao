@@ -1,0 +1,6 @@
+{
+    "CAMINHO_PADRAO": "Z:/PRODUTO/PADRONIZADO",
+    "CAMINHO_PROCESSO": "Z:/PROCESSO",
+    "CAMINHO_MAQUINAS": ["//192.168.15.119/tp901 (g)/GIMI/PROCESSO", "//192.168.15.120/usb disk (g)/GIMI"],
+    "procurar_extensoes": ["dft", "txt"]
+}
