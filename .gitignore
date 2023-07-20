@@ -207,4 +207,15 @@ pyrightconfig.json
 .history
 .ionide
 
+# Folders to ignore
+teste/
+.idea/
+
+# Ignore dft files
+*.dft
+*.DFT
+
+# log testing files
+Copy DFT log.txt
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,git

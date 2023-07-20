@@ -98,11 +98,12 @@ class fileManager:
 
             except:
                 print(f"[Arquivo não encontrado]: {file['name']}")
-                not_found.append(file['name'])
                 continue
             
         self.logFiles(to_path, {"found": found, "not_found": not_found})
+
         print(f"[Arquivos não encontrados]: {not_found}")
+        return not_found
 
     def extensionToLower(self, file, from_path):
         #filename, extension = os.path.splitext(file) #Extension with dot
