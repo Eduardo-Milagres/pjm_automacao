@@ -31,26 +31,24 @@ class fileManager:
 
     def fileRootPath(self, file):
         paths = self.readJson('./config/config.json')
-        path_padrao = paths["CAMINHO_PADRAO"]
+        root_path = paths["CAMINHO_PADRAO"]
 
-        file_path = f"{path_padrao}/{file['tensao']} TENSÃO/{file['produto']}/PEÇA/{file['familia']}"
+        file_path = f"{root_path}/{file['tensao']} TENSÃO/{file['produto']}/PEÇA/{file['familia']}"
             
         file["caminho_padrao"] = file_path.upper()
 
         return file
 
     def fileInfo(self, from_path):
-        #from_path = from_path.replace('\\','/')
         files_on_path = os.listdir(from_path)
         files = []
         failed = []
 
         for file in files_on_path[2:]:
             try:
-                print(file)
                 filename, extension = os.path.splitext(file)
                 extension = extension[1:]
-                name_info = self.nameDecoder(filename) ### Not calling function
+                name_info = self.nameDecoder(filename)
                 name_info = self.fileRootPath(name_info)
 
                 if extension == "": extension = 'folder'
@@ -62,7 +60,6 @@ class fileManager:
                 failed.append(file)
                 continue
             
-        print(f'[Failed]: {failed}')
         return files
     
     def copy(self, to_path, extension):
@@ -77,7 +74,7 @@ class fileManager:
             file_name = f"{file['name']}.{file['extension']}"
 
             if file['extension'].lower() not in valid_extensions: continue
-            if file['extension'].isupper(): self.extensionToLower(file, to_path) # If the extesion is in uppper case calls the function to rename the extesion to lower case
+            if file['extension'].isupper(): self.extensionToLower(file, to_path) # If the file extesion is in uppper case calls the function to rename the extesion to lower case
 
             try:
                 print(f"[Copiando]: {file_name}")
@@ -88,21 +85,18 @@ class fileManager:
                     # Copy2 presrve the original file metadata -> https://docs.python.org/3.3/library/shutil.html#shutil.copy2
                     
                     shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
-                    
-                    print(f"[Caminho]: {defaut_path}")
+
                     found.append(file['name'])
-                    continue
+                    continue # Check if needed
 
                 shutil.copy2(f"{file['caminho_padrao'].upper()}/PEÇAS/{file_name}", f"{to_path.upper()}/{file_name.upper()}")
-                print(f"[Caminho]: {file['caminho_padrao'].upper()}/PEÇAS/{file_name.upper()}")
 
             except:
-                print(f"[Arquivo não encontrado]: {file['name']}")
+                not_found.append(file['name'])
                 continue
             
         self.logFiles(to_path, {"found": found, "not_found": not_found})
 
-        print(f"[Arquivos não encontrados]: {not_found}")
         return not_found
 
     def extensionToLower(self, file, from_path):
@@ -126,14 +120,11 @@ class fileManager:
 
     def rename(self, from_path):
         files = self.fileInfo(from_path)
-        print(files)
         for file in files:
             try:
                 new_filename = f'{from_path}/{file.name}.DFT'
 
                 if file.extension == "dft":
                     os.rename(f'{from_path}/{file.name}.{file.extension}', new_filename)
-                    print(f'{file} -> {new_filename}')
             except:
-                print('erro')
                 continue
