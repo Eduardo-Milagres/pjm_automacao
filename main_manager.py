@@ -1,4 +1,4 @@
-from modulos.fileManager import fileManager
+from modules.fileManager import fileManager
 
 class Main:
     def __init__(self):
