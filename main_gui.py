@@ -1,4 +1,4 @@
-from modulos.fileManager import fileManager
+from modules.fileManager import fileManager
 import copy_gui
 import customtkinter
 

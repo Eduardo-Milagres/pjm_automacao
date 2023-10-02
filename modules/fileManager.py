@@ -39,11 +39,11 @@ class fileManager:
 
         return file
 
-    def fileInfo(self, from_path):
+    def fileInfo(self, from_path): # Verificar função
         files_on_path = os.listdir(from_path)
         files = []
         failed = []
-
+        print(f'[files on path]? {files_on_path}')
         for file in files_on_path[2:]:
             try:
                 filename, extension = os.path.splitext(file)
@@ -56,10 +56,10 @@ class fileManager:
                 name_info["extension"] = extension
 
                 files.append(name_info)
+                print(name_info["name"])
             except:
                 failed.append(file)
                 continue
-            
         return files
     
     def copy(self, to_path, extension):
@@ -74,24 +74,28 @@ class fileManager:
             file_name = f"{file['name']}.{file['extension']}"
 
             if file['extension'].lower() not in valid_extensions: continue
-            if file['extension'].isupper(): self.extensionToLower(file, to_path) # If the file extesion is in uppper case calls the function to rename the extesion to lower case
+            if file['extension'].isupper(): self.extensionToLower(file, to_path)
 
             try:
-                print(f"[Copiando]: {file_name}")
+                #print(f"[Copiando]: {file_name}")
+
 
                 if file['produto'].lower() == 'new piccolo' or file['produto'].lower() == 'invólucro':
                     defaut_path = f"{file['caminho_padrao'].upper()}/DFTS NOVOS/{file_name}"
+                else:
+                    defaut_path = f"{file['caminho_padrao'].upper()}/{file_name}"
 
-                    # Copy2 presrve the original file metadata -> https://docs.python.org/3.3/library/shutil.html#shutil.copy2
-                    
-                    shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
+                #print(defaut_path)
+                # Copy2 presrve the original file metadata -> https://docs.python.org/3.3/library/shutil.html#shutil.copy2
+                shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
 
-                    found.append(file['name'])
-                    continue # Check if needed
+                found.append(file['name'])
+                continue # Check if needed
 
                 shutil.copy2(f"{file['caminho_padrao'].upper()}/PEÇAS/{file_name}", f"{to_path.upper()}/{file_name.upper()}")
 
             except:
+                print(f"[Não encontrado]: {file_name}")
                 not_found.append(file['name'])
                 continue
             

@@ -1,4 +1,4 @@
-from modulos.docMerger import *
+from modules.docMerger import *
 import customtkinter, tkinter.messagebox
 
 class Merger_gui:
