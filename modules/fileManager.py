@@ -67,13 +67,40 @@ class fileManager:
 
     def fileRootPath(self, file: object) -> object:
         """
-            Adiciona a propriedade 'CAMINHO_PADRÃO' ao objeto da peça.
+            Adiciona a propriedade 'CAMINHO_PADRÃO' ao objeto da peça a partir da pasta base de biblioteca de projetos (CAMINHO_PADRÃO) contida no arquivo /config/config.json.
 
             Parameters:
-                file: a
+                file: Objeto com as informações da peça
 
             Returns:
-                Objeto com os dados do arquivo .json
+                Acrescenta o parâmetro "caminho_padrao" ao objeto da peça.
+                
+            Examples:
+                >>> file = {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                }
+                >>> fileRootPath(file)
+                {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                    'caminho_padrao': Z:/PRODUTO/PADRONIZADO/MÉDIA TENSÃO/NEW PICCOLO/PEÇA/BASE
+                }
+                
         """
                 
         paths = self.readJson('./config/config.json')

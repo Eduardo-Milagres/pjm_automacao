@@ -5,3 +5,6 @@
 
 ## nameDecoder
 ::: modules.fileManager.fileManager.nameDecoder
+
+## fileRootPath
+::: modules.fileManager.fileManager.fileRootPath
