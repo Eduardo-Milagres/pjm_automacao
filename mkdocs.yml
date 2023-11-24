@@ -1,0 +1,12 @@
+site_name: Automação
+theme:
+  name: material
+  language: pt-BR
+plugins:
+- search
+- mkdocstrings:
+    handlers:
+      python: 
+        options:  
+          heading_level: 2
+
