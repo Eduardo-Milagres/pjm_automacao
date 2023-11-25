@@ -112,7 +112,20 @@ class fileManager:
 
         return file
 
-    def fileInfo(self, from_path): # Verificar função
+    def fileInfo(self, from_path: str) -> list[object]: # Verificar função
+        """
+            Cria uma lista com todas as informações das peças de um diretório. 
+
+            Parameters:
+                from_path: Caminho do diretório com os arquivos que se deseja obter as informações.
+
+            Returns:
+                Uma lista de objetos com as informações das peças do diretório passado.
+                
+            Examples:
+                >>> 
+                
+        """
         files_on_path = os.listdir(from_path)
         files = []
         failed = []
