@@ -1,5 +1,6 @@
-import os, json, shutil
-
+import os
+import json
+import shutil
 
 class fileManager:
     def readJson(self, json_path: str) -> object:
@@ -112,6 +113,8 @@ class fileManager:
 
         return file
 
+# ToDo
+# Exemples: passar o argumento da função
     def fileInfo(self, from_path: str) -> list[object]: # Verificar função
         """
             Cria uma lista com todas as informações das peças de um diretório. 
@@ -123,7 +126,23 @@ class fileManager:
                 Uma lista de objetos com as informações das peças do diretório passado.
                 
             Examples:
-                >>> 
+                >>> fileInfo('')
+                [
+                    {
+                        'name': 'NP.P.BA.001.01.BB',
+                        'produto': New Piccolo'
+                        'tensao': 'média',
+                        'tipo': 'peça',
+                        'familia': 'base',
+                        'numero_sequencia': 001,
+                        'numero_variavel': 01,
+                        'material': 'NBR 7008 ZC',
+                        'bitola': 14
+                        'caminho_padrao': 'Z:/PRODUTO/PADRONIZADO/MÉDIA TENSÃO/NEW PICCOLO/PEÇA/BASE'
+                        'extension': '.DFT'
+                    },
+                    ...
+                ]
                 
         """
         files_on_path = os.listdir(from_path)
@@ -149,8 +168,30 @@ class fileManager:
                 failed.append(file)
                 continue
         return files
-    
-    def copy(self, to_path, extension):
+
+# ToDo
+# Exemplos: adiconar diretório destino  
+    def copy(self, to_path: str, extension: list[str]) -> list[str]:
+        """
+            Copia os arquivos com a extensão passada do diretório padrão para o diretório passado. 
+
+            Parameters:
+                to_path: Caminho do diretório para onde os arquivos serão copiados.
+                extension: Lista com as extensões dos arquivos que deseja copiar.
+
+            Returns:
+                Uma lista de strings com os nomes dos arquivos não encontrados no diretório padrão.
+                
+            Examples:
+                Arquivos no diretório destino ():
+                    NP.P.BA.001.01.BA.DFT
+                    NP.P.SU.008.03.BB.DFT
+                    NP.P.FE.005.07.CB-XXXX.DFT
+                >>> copy('', 'DFT')
+                [
+                    ['NP.P.FE.005.07.CB-XXXX']
+                ]     
+        """
         files_info = []
         found = []
         not_found = []
@@ -187,7 +228,20 @@ class fileManager:
 
         return not_found
 
-    def extensionToLower(self, file, from_path):
+# ToDo
+# Exemples: Incluir caminho
+    def extensionToLower(self, file: str, from_path: str):
+        """
+            Muda a extensão do arquivo para minúscula (lower case). 
+
+            Parameters:
+                file: Arquivo com a extensão em maiúscula.
+                from_path: Caminho do diretório onde a extensão dos arquivos será verificada.
+                
+            Examples:
+                >>> extensionToLower('NP.P.BA.001.01.BB.DFT', '')
+                NP.P.BA.001.01.BB.dft
+        """
         filename, extension = file['name'], file['extension']
 
         file_name = f'{filename}.{extension}'
@@ -196,7 +250,21 @@ class fileManager:
         os.rename(f'{from_path}\{file_name}', f'{from_path}\{new_name}')
         return
 
-    def logFiles(self, to_path, file_status):
+# ToDo
+# Exemples
+    def logFiles(self, to_path: str, file_status: object[str]):
+        """
+            Gera um arquivo de texto no diretório passado com as peças encontradas 
+            e não encontradas no diretório padrão 
+
+            Parameters:
+                to_path: Caminho do diretório os arquivos serão verificada.
+                file_status: Status da peça encontrada ou não.
+                
+            Examples:
+                >>> 
+        """
+
         file = open(f'{to_path}\Copy DFT log.txt', 'w')
 
         file.write(f"not_found: {str(file_status['not_found'])} \n\n found: {str(file_status['found'])}")
