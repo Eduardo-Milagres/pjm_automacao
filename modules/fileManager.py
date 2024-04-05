@@ -80,7 +80,9 @@ class fileManager:
                 print(f"[Copiando]: {file_name}")
 
                 if file['produto'].lower() == 'new piccolo' or file['produto'].lower() == 'invólucro':
-                    defaut_path = f"{file['caminho_padrao'].upper()}/DFTS NOVOS/{file_name}"
+                    #defaut_path = f"{file['caminho_padrao'].upper()}/DFTS NOVOS/{file_name}"
+                    defaut_path = f"{file['caminho_padrao'].upper()}/{file_name}"
+
 
                     # Copy2 presrve the original file metadata -> https://docs.python.org/3.3/library/shutil.html#shutil.copy2
                     
