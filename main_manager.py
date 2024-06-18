@@ -8,4 +8,6 @@ class Main:
 
 
 if __name__ == "__main__":
-    Main()
+    while True:
+        Main()  
+        print('\n--------------------------------\n')
