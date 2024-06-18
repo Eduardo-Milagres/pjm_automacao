@@ -19,6 +19,7 @@
         "BT": "batente",
         "CC": "caixa",
         "CX": "caixa",
+        "CT": "caixa",
         "CH": "chapéu",
         "CL": "coluna",
         "FE": "fechamento",
@@ -36,7 +37,13 @@
     "materiais": {
         "A": "SAE 1008",
         "B": "NBR 7008 ZC",
-        "C": "NBR 7008 ZC PRÉ PINRTADO"
+        "C": "NBR 7008 ZC PRÉ PINRTADO",
+        "D": "Cobre",
+        "E": "Alumínio",
+        "F": "Policarbonato",
+        "G": "Fibra de vidro",
+        "H": "Celeron",
+        "I": "ASTM A36"
     },
     "bitolas": {
         "A": "12",
