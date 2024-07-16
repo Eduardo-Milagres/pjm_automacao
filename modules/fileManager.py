@@ -27,6 +27,7 @@ class fileManager:
             "material": name_meanings["materiais"][material].upper(),
             "bitola": name_meanings["bitolas"][bitola].upper()
         }
+        #pprint(name_properties)
         return name_properties
 
     def fileRootPath(self, file):
@@ -34,7 +35,10 @@ class fileManager:
         root_path = paths["CAMINHO_PADRAO"]
 
         file_path = f"{root_path}/{file['tensao']} TENSÃO/{file['produto']}/PEÇA/{file['familia']}"
-            
+        
+        if file['produto'].lower() == 'caixa de medição':
+            file_path = f"{root_path}/{file['tensao'].upper()} TENSÃO/{file['produto'].upper()}/PEÇAS"
+
         file["caminho_padrao"] = file_path.upper()
 
         return file
@@ -77,19 +81,24 @@ class fileManager:
             if file['extension'].isupper(): self.extensionToLower(file, to_path) # If the file extesion is in uppper case calls the function to rename the extesion to lower case
 
             try:
-                print(f"[Copiando]: {file_name}")
+                defaut_path = f"{file['caminho_padrao'].upper()}/{file_name}"
+                print(f"[Copiando]: {defaut_path}")
 
-                if file['produto'].lower() == 'new piccolo' or file['produto'].lower() == 'invólucro':
+                shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
+
+                found.append(file['name'])
+
+                #if file['produto'].lower() == 'new piccolo' or file['produto'].lower() == 'invólucro':
                     #defaut_path = f"{file['caminho_padrao'].upper()}/DFTS NOVOS/{file_name}"
-                    defaut_path = f"{file['caminho_padrao'].upper()}/{file_name}"
+                #    defaut_path = f"{file['caminho_padrao'].upper()}/{file_name}"
 
 
                     # Copy2 presrve the original file metadata -> https://docs.python.org/3.3/library/shutil.html#shutil.copy2
                     
-                    shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
+                #    shutil.copy2(defaut_path, f"{to_path.upper()}/{file_name}")
 
-                    found.append(file['name'])
-                    continue # Check if needed
+                #    found.append(file['name'])
+                #    continue # Check if needed
 
                 shutil.copy2(f"{file['caminho_padrao'].upper()}/PEÇAS/{file_name}", f"{to_path.upper()}/{file_name.upper()}")
 
