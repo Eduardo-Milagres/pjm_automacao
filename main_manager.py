@@ -6,7 +6,6 @@ class Main:
         Manager = fileManager()
         Manager.copy(from_path, 'dft')
 
-
 if __name__ == "__main__":
     while True:
         Main()  

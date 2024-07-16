@@ -5,7 +5,7 @@ import customtkinter
 
 class main:
     def __init__(self):
-        config = fileManager().readJson("config/GUI.json")
+        config = fileManager().readJson('config/GUI.json')
         self.main_GUI(config)
 
     def main_GUI(self, config):
@@ -20,7 +20,7 @@ class main:
         customtkinter.set_default_color_theme('green')
 
         root = customtkinter.CTk()
-        root.title("Copy DFTs")
+        root.title('Copy DFTs')
         root.geometry(f'{WINDOW_WIDTH}x{WINDOW_HEIGHT}')
         root.resizable(RESIZE, RESIZE)
 
@@ -36,6 +36,6 @@ class main:
 
         root.mainloop()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
 

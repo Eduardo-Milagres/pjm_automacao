@@ -1,17 +1,53 @@
-import os, json, shutil
+import os
+import json
+import shutil
 
 class fileManager:
-    def readJson(self, json_path):
-        data = open(json_path, encoding="utf-8")
+    def readJson(self, json_path: str) -> object:
+        """
+            Converte um arquivo Json para um objeto python.
+
+            Parameters:
+                json_path: Caminho do arquivo python
+
+            Returns:
+                Objeto com os dados do arquivo .json
+        """
+        data = open(json_path, encoding='utf-8')
         file = json.load(data,)
         
         return file    
 
-    def nameDecoder(self, file_name):
+    def nameDecoder(self, file_name: str) -> object:
+        """
+            Decodifica o nome do arquivo de acordo com o código GIMI
+
+            Note:
+                A codificação GIMI está armazenada no arquivo config/nomenclatura.json
+
+            Parameters:
+                file_name: Nome do arquivo a ser decodificado
+
+            Returns:
+                Objeto com as informações contidas no código -> {nome, produto, tensão, tipo, família, número sequencial, número da variável, material e bitola}
+
+            Examples:
+                >>> nameDecoder("NP.P.BA.001.01.BB")
+                {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                }
+        """
         names_path = './config/nomenclaturas.json'
         name_meanings = self.readJson(names_path)
-        name_properties = file_name.upper().split(".")
-
+        name_properties = file_name.upper().split('.')
         produto, tipo, familia = name_properties[0], name_properties[1], name_properties[2]
         numero_sequencia, numero_variavel = name_properties[3], name_properties[4]
         bitola, material = name_properties[5][0], name_properties[5][1]
@@ -117,6 +153,7 @@ class fileManager:
         file_name = f"{filename}.{extension}"
         new_name = f"{filename}.{extension.lower()}"
 
+
         os.rename(f'{from_path}\{file_name}', f'{from_path}\{new_name}')
         return
 
@@ -125,6 +162,25 @@ class fileManager:
 
         f.write(f"not_found: {str(file_status['not_found'])} \n\n found: {str(file_status['found'])}")
         f.close()
+# ToDo
+# Exemples
+    def logFiles(self, to_path: str, file_status: object[str]):
+        """
+            Gera um arquivo de texto no diretório passado com as peças encontradas 
+            e não encontradas no diretório padrão 
+
+            Parameters:
+                to_path: Caminho do diretório os arquivos serão verificada.
+                file_status: Status da peça encontrada ou não.
+                
+            Examples:
+                >>> 
+        """
+
+        file = open(f'{to_path}\Copy DFT log.txt', 'w')
+
+        file.write(f"not_found: {str(file_status['not_found'])} \n\n found: {str(file_status['found'])}")
+        file.close()
 
     def sendToMachines(from_path):
         pass
@@ -139,3 +195,4 @@ class fileManager:
                     os.rename(f'{from_path}/{file.name}.{file.extension}', new_filename)
             except:
                 continue
+
