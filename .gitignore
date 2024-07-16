@@ -218,7 +218,8 @@ teste/
 # log testing files
 Copy DFT log.txt
 
-#Ignore executable files
+# Extensions to ignore
 *.exe
+*.rar
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,git
