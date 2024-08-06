@@ -139,7 +139,7 @@ class fileManager:
                 shutil.copy2(f"{file['caminho_padrao'].upper()}/PEÇAS/{file_name}", f"{to_path.upper()}/{file_name.upper()}")
 
             except:
-                #not_found.append(file['name'])
+                not_found.append(file['name'])
                 continue
             
         self.logFiles(to_path, {"found": found, "not_found": not_found})

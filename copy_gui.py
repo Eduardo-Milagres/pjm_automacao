@@ -12,10 +12,11 @@ class Copy_gui:
         #tb_not_found = customtkinter.CTkTextbox(master=root, width=400)
         #tb_not_found.pack(padx=10)
 
-        button = customtkinter.CTkButton(master=root, text='Copiar', command=lambda: self.caller(entry_path.get(), tb_not_found))
+        #button = customtkinter.CTkButton(master=root, text='Copiar', command=lambda: self.caller(entry_path.get(), tb_not_found))
+        button = customtkinter.CTkButton(master=root, text='Copiar', command=lambda: self.caller(entry_path.get()))
         button.pack(padx=20, pady=10)
 
-    def caller(self, path, tb_not_found):
+    def caller(self, path, tb_not_found=None):
         Manager = fileManager()
         not_found = Manager.copy(path, 'dft')
         #self.not_found(not_found, tb_not_found)
