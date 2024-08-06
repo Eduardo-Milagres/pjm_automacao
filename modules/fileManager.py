@@ -139,7 +139,7 @@ class fileManager:
                 shutil.copy2(f"{file['caminho_padrao'].upper()}/PEÇAS/{file_name}", f"{to_path.upper()}/{file_name.upper()}")
 
             except:
-                not_found.append(file['name'])
+                #not_found.append(file['name'])
                 continue
             
         self.logFiles(to_path, {"found": found, "not_found": not_found})
@@ -157,14 +157,9 @@ class fileManager:
         os.rename(f'{from_path}\{file_name}', f'{from_path}\{new_name}')
         return
 
-    def logFiles(self, to_path, file_status):
-        f = open(f"{to_path}\Copy DFT log.txt", "w")
-
-        f.write(f"not_found: {str(file_status['not_found'])} \n\n found: {str(file_status['found'])}")
-        f.close()
 # ToDo
 # Exemples
-    def logFiles(self, to_path: str, file_status: object[str]):
+    def logFiles(self, to_path: str, file_status):
         """
             Gera um arquivo de texto no diretório passado com as peças encontradas 
             e não encontradas no diretório padrão 
