@@ -66,7 +66,43 @@ class fileManager:
         #pprint(name_properties)
         return name_properties
 
-    def fileRootPath(self, file):
+    def fileRootPath(self, file) -> object:
+        """
+            Adiciona o caminho caminho da peça na pasta padrão de acordo com o nome do arquivo no objeto com as informações da peça.
+
+            Parameters:
+                file: Objeto do arquivo em que a propriedade será adicionada
+
+            Returns:
+                Objeto com as informações contidas no código -> {nome, produto, tensão, tipo, família, número sequencial, número da variável, material, bitola e caminho_padrao}
+
+            Examples:
+                >>> peça = {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                }
+
+                >>> FileRootPath(peça)
+                {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                    'caminho_padrão': 'PRODUTO/PADRONIZADO/MÉDIA TENSÃO/NEW PICCOLO/PEÇA/BASE'
+                }
+        """
         paths = self.readJson('./config/config.json')
         root_path = paths["CAMINHO_PADRAO"]
 
@@ -79,7 +115,42 @@ class fileManager:
 
         return file
 
-    def fileInfo(self, from_path):
+    def fileInfo(self, from_path) -> list[object]:
+        """
+            Adiciona a uma lista todas as peças encontradas no caminho passado com as informação importante sobre o arquivo.
+
+            Parameters:
+                from_path: Caminho da pasta com os DFTs
+
+            Returns:
+                Lista de objetos com as informações contidas no código para todas as peças da pasta passada.
+
+            Examples:
+                >>> filinfo("/caminho_dos_DFTS")
+                {
+                    'name': 'NP.P.BA.001.01.BB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'base',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC',
+                    'bitola': 14
+                },
+                {
+                    'name': 'NP.P.FE.001.01.CB',
+                    'produto': New Piccolo'
+                    'tensao': 'média',
+                    'tipo': 'peça',
+                    'familia': 'fechamento',
+                    'numero_sequencia': 001,
+                    'numero_variavel': 01,
+                    'material': 'NBR 7008 ZC PRÉ PINTADO',
+                    'bitola': 14
+                },
+                {...}
+        """
         files_on_path = os.listdir(from_path)
         files = []
         failed = []
@@ -101,7 +172,7 @@ class fileManager:
                 continue
             
         return files
-    
+       
     def copy(self, to_path, extension):
         files_info = []
         found = []

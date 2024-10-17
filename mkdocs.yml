@@ -8,6 +8,6 @@ plugins:
     handlers:
       python: 
         options:  
-          heading_level: 2
+          heading_level: 0 # 0 Elimina a duplicidade de nomes na lista de conteúdo
 
 
