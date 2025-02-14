@@ -115,7 +115,7 @@ class fileManager:
 
         return file
 
-    def fileInfo(self, from_path) -> list[object]:
+    def fileInfo(self, from_path: str) -> list[object]:
         """
             Adiciona a uma lista todas as peças encontradas no caminho passado com as informação importante sobre o arquivo.
 
@@ -173,7 +173,22 @@ class fileManager:
             
         return files
        
-    def copy(self, to_path, extension):
+    def copy(self, to_path: str, extension: str) -> list[str]:
+        """
+            Copia os arquivos com a extensão passada do caminho padrão para o caminho especificado.
+
+            Parameters:
+                to_path: Caminho da pasta onde os arquivos serão copiados.
+                extension: Extensão dos arquivos a serem copiados.
+
+            Returns:
+                Uma lista de strings com o nome dos arquivos que não foram encontrados no caminho padrão.
+
+            Examples:
+                >>> filinfo("/caminho_dos_DFTS", ".dft")
+                [NP.P.FE.001.01.CB, NP.P.BA.001.01.BB, ...]
+                
+        """
         files_info = []
         found = []
         not_found = []
@@ -217,7 +232,19 @@ class fileManager:
 
         return not_found
 
-    def extensionToLower(self, file, from_path):
+    def extensionToLower(self, file, from_path: str) -> None:
+        """
+            Altera a extensão do arquivo para letras minúsculas
+
+            Parameters:
+                file: Arquivo que terá a extensão alterada para minpuscula.
+                from_path: Caminho do arquivo que terá a extensão alterada para minúscula.
+            
+            Examples:
+                >>> extensionToLower("NP.P.FE.001.01.CB.DFT", "/caminho_dos_DFTS")
+                >>> /caminho_dos_DFTS/NP.P.FE.001.01.CB.dft
+        """
+
         #filename, extension = os.path.splitext(file) #Extension with dot
         filename, extension = file['name'], file['extension']
 
@@ -230,7 +257,7 @@ class fileManager:
 
 # ToDo
 # Exemples
-    def logFiles(self, to_path: str, file_status):
+    def logFiles(self, to_path: str, file_status) -> None :
         """
             Gera um arquivo de texto no diretório passado com as peças encontradas 
             e não encontradas no diretório padrão 
@@ -248,10 +275,17 @@ class fileManager:
         file.write(f"not_found: {str(file_status['not_found'])} \n\n found: {str(file_status['found'])}")
         file.close()
 
-    def sendToMachines(from_path):
-        pass
+    def rename(self, from_path: str) -> None:
+        """
+            Lista os arquivos do diretório passado e verifica se o arquivo tem a 
+            extensão em letras minúscula, senão renoia a extensão para letras maiúsculas.  
 
-    def rename(self, from_path):
+            Parameters:
+                to_path: Caminho do diretório dos arquivos que serão verificados.
+                
+            Examples:
+                >>> rename("PRODUTO/PADRONIZADO/MÉDIA TENSÃO/NEW PICCOLO/PEÇA/BASE")
+        """
         files = self.fileInfo(from_path)
         for file in files:
             try:
